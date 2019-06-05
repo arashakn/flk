@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.flickr.photoalbum.PhotoAlbumViewModel;
 import com.flickr.photoalbum.R;
 import com.flickr.photoalbum.service.model.Image;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -56,18 +57,25 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
 
 
 
-        Picasso.with(holder.iv_thumb.getContext()).load(imageURL)
+        Picasso.with(holder.iv_thumb.getContext().getApplicationContext()).load(imageURL)
                 .fit()
                 .centerCrop()
-                .into(holder.iv_thumb)
-        ;
+                .error(holder.iv_thumb.getContext().getResources().getDrawable(R.drawable.ic_image))
+                .into(holder.iv_thumb, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("suc", "suc: ");
 
-//        Picasso.with(holder.iv_thumb.getContext()).load(imageURL)
-//                .fit()
-//                .centerCrop()
-//                .placeholder(holder.iv_thumb.getContext()
-//                        .getResources().getDrawable(R.drawable.ic_image)).
-//                error(holder.iv_thumb.getContext().getResources().getDrawable(R.drawable.ic_image)).into(holder.iv_thumb);
+                            }
+
+                            @Override
+                            public void onError() {
+                                Log.d("erorr", "onError: ");
+                            }
+                        }
+
+                )
+        ;
 
     }
 
