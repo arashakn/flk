@@ -19,12 +19,10 @@ public class PhotoAlbumActivity extends AppCompatActivity implements PhotoListAd
     private RecyclerView rv_photos;
     private PhotoListAdapter photoListAdapter;
     //data binding
-    private ActivityPhotoAlbumMainBinding mainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_photo_album_main);
         photoAlbumViewModel = ViewModelProviders.of(this).get(PhotoAlbumViewModel.class);
         setUpViews();
         observeViewModel();
