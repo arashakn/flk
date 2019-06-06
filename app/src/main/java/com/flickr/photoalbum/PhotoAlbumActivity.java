@@ -18,7 +18,6 @@ public class PhotoAlbumActivity extends AppCompatActivity implements PhotoListAd
     PhotoAlbumViewModel photoAlbumViewModel ;
     private RecyclerView rv_photos;
     private PhotoListAdapter photoListAdapter;
-    //data binding
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +30,11 @@ public class PhotoAlbumActivity extends AppCompatActivity implements PhotoListAd
     public void setUpViews(){
         rv_photos = findViewById(R.id.rv_photos);
         photoListAdapter = new PhotoListAdapter(photoAlbumViewModel, this, this);
-        rv_photos.setAdapter(photoListAdapter);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        rv_photos.setLayoutManager(mLayoutManager);
+        if(photoListAdapter !=null) {
+            rv_photos.setAdapter(photoListAdapter);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            rv_photos.setLayoutManager(mLayoutManager);
+        }
 
     }
 
