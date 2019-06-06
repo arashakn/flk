@@ -15,14 +15,7 @@ public class PhotoAlbumViewModel extends ViewModel {
     MutableLiveData<Boolean> error = new MutableLiveData<>();
 
     public PhotoAlbumViewModel(){
-         ArrayList<Image> images = PhotoManager.getInstance().getImages();
-         if(images.size() == 0){
-             error.setValue(true);
-         }
-         else{
-             error.setValue(false);
-             imagesList.setValue(images);
-         }
+        fetchImages();
     }
 
     public MutableLiveData<ArrayList<Image>> getImagesList() {
@@ -35,5 +28,18 @@ public class PhotoAlbumViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getError() {
         return error;
+    }
+
+    public void fetchImages(){
+        ArrayList<Image> images = PhotoManager.getInstance().getImages();
+        if(images.size() == 0){
+            error.setValue(true);
+            loading.setValue(false);
+        }
+        else{
+            error.setValue(false);
+            loading.setValue(false);
+            imagesList.setValue(images);
+        }
     }
 }

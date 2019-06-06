@@ -6,21 +6,25 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.flickr.photoalbum.adapter.PhotoListAdapter;
+import com.flickr.photoalbum.databinding.ActivityPhotoAlbumMainBinding;
 
 public class PhotoAlbumActivity extends AppCompatActivity implements PhotoListAdapter.onPhotoItemClickListener {
     public static final String TAG = PhotoAlbumActivity.class.getSimpleName();
     PhotoAlbumViewModel photoAlbumViewModel ;
     private RecyclerView rv_photos;
     private PhotoListAdapter photoListAdapter;
+    //data binding
+    private ActivityPhotoAlbumMainBinding mainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo_album_main);
+        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_photo_album_main);
         photoAlbumViewModel = ViewModelProviders.of(this).get(PhotoAlbumViewModel.class);
         setUpViews();
         observeViewModel();
